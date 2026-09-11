@@ -1,20 +1,26 @@
 
-import os, base64, tempfile, uuid, mimetypes
-from pathlib import Path
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+import os
+import uuid
+import base64
+import requests
+
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-import httpx
-from google import genai
 
-app=FastAPI(title="PetSinger Backend", version="0.2")from fastapi.middleware.cors import CORSMiddleware
+app = FastAPI(title="PetSinger Backend", version="0.2")
 
-app.add_middleware(CORSMiddleware,allow_origins=["https://peterjonas14-collab.github.io"
-    ],allow_credentials=False,allow_methods=["*"],allow_headers=["*"],)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://peterjonas14-collab.github.io"
+    ],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-
-GEMINI=os.getenv("GEMINI_API_KEY","")
-VISION=os.getenv("VISIONSTORY_API_KEY","")
-VS="https://openapi.visionstory.ai"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+VISIONSTORY_API_KEY = os.getenv("VISIONSTORY_API_KEY", "")
 
 @app.get("/health")
 def health(): return {"ok":True,"service":"PetSinger"}
