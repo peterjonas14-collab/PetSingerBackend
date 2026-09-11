@@ -17,7 +17,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+
 
 GEMINI=os.getenv("GEMINI_API_KEY","")
 VISION=os.getenv("VISIONSTORY_API_KEY","")
