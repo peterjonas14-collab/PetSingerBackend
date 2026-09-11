@@ -6,7 +6,17 @@ from fastapi.middleware.cors import CORSMiddleware
 import httpx
 from google import genai
 
-app=FastAPI(title="PetSinger Backend", version="0.2")
+app=FastAPI(title="PetSinger Backend", version="0.2")from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://peterjonas14-collab.github.io"
+    ],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 GEMINI=os.getenv("GEMINI_API_KEY","")
